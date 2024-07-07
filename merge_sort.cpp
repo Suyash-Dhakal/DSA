@@ -1,65 +1,73 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-class Sorter{
+class Sorter {
 public:
-void merge(vector<int>&arr,int l,int m,int r){
-int i=l,j=m+1,k=l;
-//i starting index for left sub array
-//j starting index for right sub array
-//k starting index for temporary merged sorted array 
-int temp[r-l+1];
-while(){
-    
-}
+    void merge(vector<int>& arr, int l, int m, int r) {
+        int i = l, j = m + 1, k = 0;
+        vector<int> temp(r - l + 1); // Temporary array to store merged elements
 
-}
+        while (i <= m && j <= r) {
+            if (arr[i] <= arr[j]) {
+                temp[k++] = arr[i++];
+            } else {
+                temp[k++] = arr[j++];
+            }
+        }
 
-void merge_sort(vector<int>&arr,int l,int r){
-if(l<r){
-    int m=(l+r)/2;
-    merge_sort(arr,l,m);
-    merge_sort(arr,m+1,r);
-    merge(arr,l,m,r);
-}
-}
+        // If any elements are left in the left subarray, add them to the temp array
+        while (i <= m) {
+            temp[k++] = arr[i++];
+        }
+
+        // If any elements are left in the right subarray, add them to the temp array
+        while (j <= r) {
+            temp[k++] = arr[j++];
+        }
+
+        // Copy the sorted elements back into the original array
+        for (int p = 0; p < k; p++) {
+            arr[l + p] = temp[p];
+        }
+    }
+
+    void merge_sort(vector<int>& arr, int l, int r) {
+        if (l < r) {
+            int m = (l + r) / 2;
+            merge_sort(arr, l, m);
+            merge_sort(arr, m + 1, r);
+            merge(arr, l, m, r);
+        }
+    }
 };
 
-int main(){
+int main() {
     int size;
-    // Taking the size of the array as input
-cout<<"Enter the size of the array:" <<endl;
-cin>>size;
-   // Dynamically creating a vector of integers
-vector<int> arr;
+    cout << "Enter the size of the array:" << endl;
+    cin >> size;
 
- cout << "Enter the array contents:" << endl;
+    vector<int> arr(size);
+    cout << "Enter the array contents:" << endl;
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i];
+    }
 
- for(int i=0;i<size;i++){
-    int val;
-    cin>>val;
-    arr.push_back(val);
- }
-
- cout<<"The Unsorted Array is:"<<endl;
- for(int i=0;i<size;i++){
-    cout<<arr[i]<<" ";
- }
+    cout << "The Unsorted Array is:" << endl;
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
     cout << endl;
 
-Sorter sortObj;
+    Sorter sortObj;
+    sortObj.merge_sort(arr, 0, size - 1);
 
-    // Calling the merge_sort() function
-    sortObj.merge_sort(arr,0,size-1);
-
-cout << "The Sorted array is:" << endl;
+    cout << "The Sorted array is:" << endl;
     for (int k = 0; k < size; k++) {
         cout << arr[k] << " ";
     }
     cout << endl;
 
-return 0;
+    return 0;
 }
