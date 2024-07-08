@@ -57,12 +57,13 @@ int main()
     int capacity=60;
 
 bubble_sort(items);
-
-float profit=knapsack(items,capacity);
-
+//sorting items on the basis of decreasing order of max profit/weight
 for(int i=0;i<size;i++){
     printf("%.2f ",items[i].pw);
 }
+
+float profit=knapsack(items,capacity);
+
 
 printf("\nThe Max profit is:%.2f",profit);
 
