@@ -25,8 +25,8 @@ void bubble_sort(Item* items) {
     }
 }
 
-int knapsack(Item* items,int capacity){
-int max_profit=0;
+float knapsack(Item* items,int capacity){
+float max_profit=0;
 for (int i = 0; i < size; i++) {
         if (capacity >= items[i].weight) {
             max_profit += items[i].profit;
