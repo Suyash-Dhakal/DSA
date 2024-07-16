@@ -11,9 +11,9 @@ int i=l;
 int j=r;
 int p=arr[i];
 while(i<j){
-while(arr[i]<=p)
+while(arr[i]<=p && i<=r)
 i++;
-while(arr[j]>p)
+while(arr[j]>p && j>=l)
 j--;
 if(i<j){
 std::swap(arr[i], arr[j]);
